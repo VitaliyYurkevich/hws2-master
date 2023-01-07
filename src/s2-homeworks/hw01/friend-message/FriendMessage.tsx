@@ -1,7 +1,11 @@
 import React from 'react'
 import s from './FriendMessage.module.css'
+import {MessageType} from "../HW1";
 
 // создать тип вместо any и отобразить приходящие данные
+type MessagePropsType = {
+    massage: MessageType
+}
 const FriendMessage = (props: any) => {
     return (
         <div
@@ -12,14 +16,14 @@ const FriendMessage = (props: any) => {
                 <img
                     id={'hw1-friend-avatar-' + props.message.id}
                     // создаёт студент
-
+                    src={props.message.user.avatar}
                     //
                 />
                 <div className={s.friendText}>
                     <div
                         id={'hw1-friend-name-' + props.message.id}
                         className={s.friendName}
-                    >
+                    >{props.message.user.name}
                         {/*создаёт студент*/}
 
                         {/**/}
@@ -29,7 +33,7 @@ const FriendMessage = (props: any) => {
                         className={s.friendMessageText}
                     >
                         {/*создаёт студент*/}
-
+                        {props.message.message.time}
                         {/**/}
                     </pre>
                 </div>
