@@ -35,14 +35,14 @@ const defaultAffairs: AffairType[] = [ // need to fix any
 ]
 
 // pure helper functions
-export const filterAffairs = (affairs: AffairType[], filter: FilterType): AffairType[] => { // need to fix any
+export const filterAffairs = (affairs: AffairType[], filterValue: FilterType): AffairType[] => { // need to fix any
 
 
-    return affairs // need to fix
+    return affairs.filter((t)=>t.priority === filterValue) // need to fix
 }
 export const deleteAffair = (affairs: AffairType[], _id: number): AffairType[] => { // need to fix any
 
-    return affairs // need to fix
+    return affairs.filter((a)=>a._id !== _id) // need to fix
 }
 
 function HW2() {
@@ -50,24 +50,21 @@ function HW2() {
     const [filter, setFilter] = useState<FilterType>('all')
 
     const filteredAffairs = filterAffairs(affairs, filter)
-    const deleteAffairCallback = (_id: number) => {
-        let deleteAffair = affairs.filter(a=>a._id !== _id)
-        setAffairs(deleteAffair)// need to fix any// need to fix
+    const deleteAffairCallback = (_id: number) => { // need to fix any// need to fix}
+        setAffairs(deleteAffair(affairs, _id))
     }
-
-    return (
-        <div id={'hw2'}>
-            <div className={s2.hwTitle}>Homework #2</div>
-            <div className={s2.hw}>
-                <Affairs
-                    data={filteredAffairs}
-                    setFilter={setFilter}
-                    deleteAffairCallback={deleteAffairCallback}
-                    filter={filter}
-                />
+        return (
+            <div id={'hw2'}>
+                <div className={s2.hwTitle}>Homework #2</div>
+                <div className={s2.hw}>
+                    <Affairs
+                        data={filteredAffairs}
+                        setFilter={setFilter}
+                        deleteAffairCallback={deleteAffairCallback}
+                        filter={filter}
+                    />
+                </div>
             </div>
-        </div>
-    )
-}
-
+        )
+    }
 export default HW2
