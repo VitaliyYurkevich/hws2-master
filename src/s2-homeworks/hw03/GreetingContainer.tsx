@@ -7,14 +7,26 @@ type GreetingContainerPropsType = {
     addUserCallback: (name: string) => void // need to fix any
 }
 
-export const pureAddUser = (name: string, setError: (value: string) => void, setName: (value: string) => void, addUserCallback: (name: string) => void) => {
-    // если имя пустое - показать ошибку, иначе - добавить юзера и очистить инпут
+export const pureAddUser = (name: string, setError: (value: string) => void, setName: (name: string) => void, addUserCallback: (name: string) => void) => {
+    if (name.trim() === '') {
+        setError('Ошибка! Введите имя!')
+    } else {
+        setName('')
+        addUserCallback('')
+    }// если имя пустое - показать ошибку, иначе - добавить юзера и очистить инпут
 }
 
-export const pureOnBlur = (name: string, setError: (value: string) => void) => { // если имя пустое - показать ошибку
+export const pureOnBlur = (name: string, setError: (value: string) => void) => {
+
+    // если имя пустое - показать ошибку
 }
 
-export const pureOnEnter = (e: KeyboardEvent<HTMLInputElement>, addUser: (value: string) => void) => { // если нажата кнопка Enter - добавить
+export const pureOnEnter = (e: KeyboardEvent<HTMLInputElement>, addUser: () => void) => {
+    if (e.key === 'Enter') {
+        addUser()
+    }
+
+    // если нажата кнопка Enter - добавить
 }
 
 // более простой и понятный для новичков
@@ -41,10 +53,7 @@ const GreetingContainer: React.FC<GreetingContainerPropsType> = ({
 
     }
     const addUser = () => {
-        addUserCallback(lastUserName)
         pureAddUser(name, setError, setName, addUserCallback)
-        setName('')
-        //добавить зачищение
     }
 
     const onBlur = () => {
@@ -52,9 +61,6 @@ const GreetingContainer: React.FC<GreetingContainerPropsType> = ({
     }
 
     const onEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-        if(e.charCode === 13) {
-            addUser()
-        }
         pureOnEnter(e, addUser)
     }
 
