@@ -17,7 +17,10 @@ export const pureAddUser = (name: string, setError: (value: string) => void, set
 }
 
 export const pureOnBlur = (name: string, setError: (value: string) => void) => {
-
+    if (name.trim() === '') {
+        return setError('Ошибка! Введите имя!')
+    }
+    return name && setError('')
     // если имя пустое - показать ошибку
 }
 
