@@ -1,10 +1,8 @@
-const initState = {
+let initState = {
     themeId: 1,
 }
 
-type initStateType = {
-    themeId: number
-}
+type initStateType = typeof initState
 
 
 export const themeReducer = (state = initState, action: changeThemeIdType): initStateType => { // fix any
@@ -22,7 +20,7 @@ export const themeReducer = (state = initState, action: changeThemeIdType): init
 }
 
 type changeThemeIdType = {
-    type: string
+    type: 'SET_THEME_ID'
     id: number
 }
 
